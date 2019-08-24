@@ -1,0 +1,136 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center">Angular Form Validation</h2>
+        </div>
+    </div>
+    <form class="form-horizontal" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <div class="col-md-12">
+                <label for="username" class="control-label required">Username</label>
+                <input type="text" class="form-control" formControlName="username" autocomplete="off" [class.has-error]="contactForm.controls['username'].invalid && contactForm.controls['username'].touched " [class.no-error]="contactForm.controls['username'].valid">
+                <div class="error" *ngIf="contactForm.controls['username'].errors?.required && contactForm.controls['username'].touched">
+                    Username Is Required
+                </div>
+                <div class="error" *ngIf="contactForm.controls['username'].errors?.minlength">
+                    Minimum Length is 5 character
+                </div>
+                <div class="error" *ngIf="contactForm.controls['username'].errors?.maxlength">
+                    Maximum Length is 10 character
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <label for="fullname" class="control-label required">FullName</label>
+                <input type="text" class="form-control" formControlName="fullname" autocomplete="off" [class.has-error]="contactForm.controls['fullname'].invalid && contactForm.controls['fullname'].touched" [class.no-error]="contactForm.controls['fullname'].valid">
+                <div class="error" *ngIf="contactForm.controls['fullname'].errors?.required && contactForm.controls['fullname'].touched">
+                    Fullname Is Required
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <label for="email" class="control-label required">Email</label>
+                <input type="text" class="form-control" formControlName="email" autocomplete="off" [class.has-error]="contactForm.controls['email'].invalid && contactForm.controls['email'].touched" [class.no-error]="contactForm.controls['email'].valid">
+                <div class="error" *ngIf="contactForm.controls['email'].errors?.required && contactForm.controls['email'].touched">
+                    Email Is Required
+                </div>
+                <div class="error" *ngIf="contactForm.controls['email'].errors?.email">
+                    Email Is Invalid
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <label for="password" class="control-label required">Password</label>
+                <input type="password" class="form-control" formControlName="password" [class.has-error]="contactForm.controls['password'].invalid && contactForm.controls['password'].touched" [class.no-error]="contactForm.controls['password'].valid">
+                <div class="error" *ngIf="contactForm.controls['password'].errors?.required && contactForm.controls['password'].touched">
+                    Password Is Required
+                </div>
+                <div class="error" *ngIf="contactForm.controls['password'].errors?.minlength">
+                    Password length at least 8 character
+                </div>
+                <div class="error" *ngIf="contactForm.controls['password'].errors?.pattern">
+                    Must be alpha-numeric and special case letter and 1 uppercase
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <label for="cpassword" class="control-label required">Confirm Password</label>
+                <input type="password" class="form-control" formControlName="cpassword" [class.has-error]="contactForm.controls['cpassword'].invalid && contactForm.controls['cpassword'].touched" [class.no-error]="contactForm.controls['cpassword'].valid">
+                <div class="error" *ngIf="contactForm.controls['cpassword'].errors?.required && contactForm.controls['cpassword'].touched">
+                    Confirm Password Is Required
+                </div>
+                <div class="error" *ngIf="contactForm.errors">
+                    Confirm Password Does Not Match
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div formGroupName="address">
+                <div class="form-group addressLabel">
+                    <div class="col-md-12">
+                        <label for="address1" class="control-label required">Address1</label>
+                        <input type="text" class="form-control" autocomplete="off" formControlName="address1" [class.has-error]="contactForm.get('address').get('address1').invalid && contactForm.get('address').get('address1').touched" [class.no-error]="contactForm.get('address').get('address1').valid">
+                        <div class="error" *ngIf="contactForm.get('address').get('address1').errors &&  contactForm.get('address').get('address1').touched ">
+                            Address1 Is Required
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="address2" class="control-label">Address2</label>
+                        <input type="text" class="form-control" formControlName="address2" autocomplete="off">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="zipcode" class="control-label required">Zipcode</label>
+                        <input type="text" class="form-control" autocomplete="off" formControlName="zipcode" [class.has-error]="contactForm.get('address').get('zipcode').invalid && contactForm.get('address').get('zipcode').touched" [class.no-error]="contactForm.get('address').get('zipcode').valid">
+                        <div class="error" *ngIf="contactForm.controls['address'].controls['zipcode'].errors?.required && contactForm.controls['address'].controls['zipcode'].touched">
+                            Zipcode Is Required
+                        </div>
+                        <div class="error" *ngIf="contactForm.controls['address'].controls['zipcode'].errors?.pattern">
+                            Zipcode Is Invalid. Must contin only numbers of length 4 to 6
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group addressLabel">
+                    <div class="col-md-12">
+                        <label for="city" class="control-label required">City</label>
+                        <input type="text" class="form-control" autocomplete="off" formControlName="city" [class.has-error]="contactForm.get('address').get('city').invalid && contactForm.get('address').get('city').touched" [class.no-error]="contactForm.get('address').get('city').valid">
+
+                        <div class="error" *ngIf="contactForm.get('address').get('city').errors &&  contactForm.get('address').get('city').touched ">
+                            City Is Required
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="state" class="control-label required">State</label>
+                        <input type="text" class="form-control" autocomplete="off" formControlName="state" [class.has-error]="contactForm.get('address').get('state').invalid && contactForm.get('address').get('state').touched" [class.no-error]="contactForm.get('address').get('state').valid">
+                        <div class="error" *ngIf="contactForm.get('address').get('state').errors &&  contactForm.get('address').get('state').touched ">
+                            State Is Required
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="country" class="control-label required">Country</label>
+                        <input type="text" class="form-control" autocomplete="off" formControlName="country" [class.has-error]="contactForm.get('address').get('country').invalid && contactForm.get('address').get('country').touched" [class.no-error]="contactForm.get('address').get('country').valid">
+                        <div class="error" *ngIf="contactForm.get('address').get('country').errors &&  contactForm.get('address').get('country').touched ">
+                            Country Is Required
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-success" [disabled]="this.contactForm.invalid">Submit</button>
+        <button class="btn btn-primary" (click)="resetForm()">Reset</button>
+
+
+
+    </form>
+</div>

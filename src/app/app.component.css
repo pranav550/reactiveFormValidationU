@@ -1,0 +1,35 @@
+.addressLabel label {
+    padding-bottom: 4px;
+}
+
+.addressLabel input {
+    margin-bottom: 8px;
+}
+
+.container {
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+
+.btn {
+    margin-left: 18px;
+}
+
+.control-label.required:after {
+    color: #d00;
+    content: '*';
+    margin-left: 5px;
+    position: absolute;
+}
+
+.error {
+    color: red;
+}
+
+.has-error {
+    border: 1px solid red;
+}
+
+.no-error {
+    border: 1px solid green;
+}
